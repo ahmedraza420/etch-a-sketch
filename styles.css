@@ -42,6 +42,39 @@ a:hover, .icon:hover{
     border-color: #79AC78;
 }
 
+.shadowlight {
+    box-shadow: 0px 0px 4px #61826480;
+}
+
+.sliderlight::-webkit-slider-thumb {
+    background: #040D12;
+}
+
+.sliderlight {
+    background: #5C8374;
+}
+
+.bgdark {
+    background-color: #0b1b24;
+}
+
+.sliderdark {
+    background: #183D3D;
+    
+}
+
+.sliderdark::-webkit-slider-thumb {
+    background: #93B1A6;
+}
+
+.hflight {
+    background-color: #B0D9B1;
+}
+
+.hfdark {
+    background-color: #183D3D;
+}
+
 #header {
     padding: 8vh 20px;
     min-height: 80px;
@@ -54,9 +87,6 @@ a:hover, .icon:hover{
     font-weight: 600;
 }
 
-#header, #footer {
-    background-color: #B0D9B1;
-}
 
 #main {
     flex: 1 0 auto;
@@ -98,7 +128,7 @@ a:hover, .icon:hover{
     align-items: center;
     max-height: 15%;
     height: 150px;
-    gap: 5px;  
+    gap: 10px;  
 }   
 
 
@@ -120,15 +150,25 @@ a:hover, .icon:hover{
 
 #gridSize {
     width: 120%;
+    appearance: none;
+    height: 7px;
+    border-radius: 5px;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
 }
-/* #colorPicker {
-    border: 2px ridge black;
-    height: 70px;
-    width: 70px;
-    aspect-ratio: 1 / 1;   
-    border-radius: 100%;
-    overflow:
-} */
+
+#gridSize::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    /* filter: brightness(80%); */
+    cursor: pointer;
+  }
+
 .menuButton {
     height: 40px;
     width: 180px;
@@ -154,9 +194,10 @@ a:hover, .icon:hover{
 #sketchBoard {
     width: 500px;
     aspect-ratio: 1 / 1;
-    background-color: cadetblue;
+    background-color: #F5F5F5;
     min-width: 500px;
 }
+
 
 
 #footer {
