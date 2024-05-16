@@ -24,61 +24,60 @@ a, a:visited {
 }
 
 a:hover, .icon:hover{
-    filter: drop-shadow(1px 2px 1px #D0E7D2);
-    text-shadow: 1px 2px 1px #D0E7D2;
+    filter: drop-shadow(1px 2px 1px rgba(208, 231, 210, 1));
+    text-shadow: 1px 2px 1px rgba(208, 231, 210, 1);
     transition: 0.3s;
 }
 
 .bglight {
-    background-color: #D0E7D2;
+    background-color: rgba(208, 231, 210, 1);
 }
 
 .textlight {
-    color: #618264;
-    fill: #618264;
+    color: rgba(97, 130, 100, 1);
+    fill: rgba(97, 130, 100, 1);
 }
 
 .borderlight {
-    border-color: #79AC78;
+    border-color: rgba(121, 172, 120, 1);
 }
 
 .shadowlight {
-    box-shadow: 0px 0px 4px #61826480;
+    box-shadow: 0px 0px 4px rgba(97, 130, 100, 0.5);
 }
 
 .sliderlight::-webkit-slider-thumb {
-    background: #040D12;
+    background: rgba(4, 13, 18, 1);
 }
 
 .sliderlight {
-    background: #5C8374;
+    background: rgba(92, 131, 116, 1);
 }
 
 .bgdark {
-    background-color: #0b1b24;
+    background-color: rgba(11, 27, 36, 1);
 }
 
 .sliderdark {
-    background: #183D3D;
+    background: rgba(24, 61, 61, 1);
     
 }
 
 .sliderdark::-webkit-slider-thumb {
-    background: #93B1A6;
+    background: rgba(147, 177, 166, 1);
 }
 
 .hflight {
-    background-color: #B0D9B1;
+    background-color: rgba(176, 217, 177, 1);
 }
 
 .hfdark {
-    background-color: #183D3D;
+    background-color: rgba(24, 61, 61, 1);
 }
 
 #header {
     padding: 4vh 0;
     min-height: 80px;
-    /* height: 5vh; */
     flex: 0 1 fit-content;
     width: 100vw;
     display: flex;
@@ -106,7 +105,6 @@ a:hover, .icon:hover{
     justify-content: center;
     align-items: center;
     gap: 2vw;
-    /* margin: 30px; */
 }
 
 #menu, #container1fixer {
@@ -123,7 +121,6 @@ a:hover, .icon:hover{
 
 #container1fixer {
     min-height: 0;        
-    /* flex: 0 0 inherit; */
 }
 
 .menuItem {
@@ -145,24 +142,14 @@ a:hover, .icon:hover{
 }
 
 #colorPicker::-webkit-color-swatch-wrapper {
-	padding: 0;
+    padding: 0;
 }
 #colorPicker::-webkit-color-swatch {
     border: none;
     border-radius: 50%;
+    box-shadow: 0px 1px 5px rgba(24, 61, 61, 1);
 }
 
-/* #colorDisplay {
-    DISPLAY: NONE;
-    height: 70px;
-    width: 70px;
-    border-width: 2px;
-    border-style: solid;
-    overflow: hidden;
-    background-color: white;
-    border-radius: 50%;
-    transition: filter 0.2s;
-} */
 
 #gridSize {
     width: 180%;
@@ -175,13 +162,16 @@ a:hover, .icon:hover{
     transition: opacity .2s;
 }
 
+#gridSize:hover {
+    opacity: 1;
+}
+
 #gridSize::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 15px;
     height: 15px;
     border-radius: 50%;
-    /* filter: brightness(80%); */
     cursor: pointer;
   }
 
@@ -204,27 +194,27 @@ a:hover, .icon:hover{
 }
 
 .menuButton.buttonlight:active, #colorDisplay:active {
-    background-color: #79AC78;
-    color: #D0E7D2;
+    background-color: rgba(121, 172, 120, 1);
+    color: rgba(208, 231, 210, 1);
     filter: brightness(100%);
     transition: 0.15s;
 }
 
 .menuButton.buttondark:active, #colorDisplay:active {
-    background-color: #79AC78;
-    color: #D0E7D2;
+    background-color: rgba(121, 172, 120, 1);
+    color: rgba(208, 231, 210, 1);
     filter: brightness(100%);
     transition: 0.15s;
 }
 
 .menuButton.modeactivelight {
-    background-color: #79AC78;
-    color: #D0E7D2;
+    background-color: rgba(120, 172, 119, 1);
+    color: rgba(208, 231, 210, 1);
 }
 
 .menuButton.modeactivedark {
-    background-color: white;
-    color: black;
+    background-color: rgba(255, 255, 255, 1);
+    color: rgba(0, 0, 0, 1);
 }
 
 #sketchBoard {
@@ -232,7 +222,7 @@ a:hover, .icon:hover{
     flex-flow: column nowrap;
     width: 600px;
     aspect-ratio: 1 / 1;
-    background-color: #F5F5F5;
+    background-color: rgba(245, 245, 245, 1);
     min-width: 600px;
     cursor: url(./images/Colebemis-Feather-Pen-tool.png), url(./images/Colebemis-Feather-Pen-tool.svg), pointer;
 }

@@ -1,5 +1,4 @@
 const sketchBoard = document.querySelector("#sketchBoard");
-// const colorSpan = document.querySelector("#colorDisplay");
 const colorPicker = document.querySelector('#colorPicker');
 const gridSize = document.querySelector('#gridSize');
 const gridSizeLabel = document.querySelector("#gridLabel");
@@ -16,15 +15,11 @@ let theme = document.querySelector('body').classList[0];
 let mode = 'color';
 
 focusButton(colorButton);
-// colorSpan.style.backgroundColor = color;
 setGrid(gridSize.value);
-gridSize.addEventListener('input', ()=>{gridSizeLabel.innerText = `${gridSize.value} x ${gridSize.value}`;
-    clearGrid();
+gridSize.addEventListener('input', ()=>{gridSizeLabel.innerText = `${gridSize.value} x ${gridSize.value}`;});
+gridSize.addEventListener('click', ()=>{clearGrid();
     setGrid(gridSize.value)});
-// colorSpan.addEventListener('click', ()=> {
-//     colorPicker.click()});
 colorPicker.addEventListener('input', () => {color = colorPicker.value});
-    // colorSpan.style.backgroundColor = color;});
 colorButton.addEventListener('click', (e) => {mode = 'color';
     focusButton(e.target)});
 eraserButton.addEventListener('click', (e) => {mode = 'eraser';
@@ -38,7 +33,6 @@ function setGrid(size){for(let i=0; i<size; i++){
     for(let j=0; j<size; j++){
             const gridItem = document.createElement('div');
             gridItem.setAttribute('class', 'gridItem');
-            // gridItem.style.border = '0.01px solid black';
             gridItem.addEventListener('mouseover', sketch);
             row.appendChild(gridItem);}
     sketchBoard.appendChild(row);}}           
