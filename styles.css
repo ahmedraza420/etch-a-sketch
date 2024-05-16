@@ -76,14 +76,15 @@ a:hover, .icon:hover{
 }
 
 #header {
-    padding: 8vh 20px;
+    padding: 4vh 0;
     min-height: 80px;
-    height: 5vh;
+    /* height: 5vh; */
+    flex: 0 1 fit-content;
     width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 4vw;
+    font-size: calc(2vw + 3vh);
     font-weight: 600;
 }
 
@@ -97,26 +98,32 @@ a:hover, .icon:hover{
 }
 
 #container1 {
-    width: 1000px;
+    width: 1200px;
     min-height: 600px;
     max-height: fit-content;
     display: flex;
-    flex-flow: row;
-    justify-content: flex-start;
+    flex-flow: row wrap-reverse;
+    justify-content: center;
     align-items: center;
     gap: 2vw;
-    margin: 30px;
+    /* margin: 30px; */
 }
 
-#menu {
-    min-height: inherit;
-    /* flex: 0 1 inherit; */
-    min-width: 220px;
+#menu, #container1fixer {
+    min-height: fit-content;
+    flex: 0 1 inherit;
+    min-width: 200px;
+    width: 230px;
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-start;
     align-items: center;
     gap: 10%;
+}
+
+#container1fixer {
+    min-height: 0;        
+    /* flex: 0 0 inherit; */
 }
 
 .menuItem {
@@ -131,13 +138,22 @@ a:hover, .icon:hover{
     gap: 10px;  
 }   
 
-
-
 #colorPicker {
-    display: none;
+    height: 70px;
+    width: 70px;
+    background: none;
 }
 
-#colorDisplay {
+#colorPicker::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+#colorPicker::-webkit-color-swatch {
+    border: none;
+    border-radius: 50%;
+}
+
+/* #colorDisplay {
+    DISPLAY: NONE;
     height: 70px;
     width: 70px;
     border-width: 2px;
@@ -146,10 +162,10 @@ a:hover, .icon:hover{
     background-color: white;
     border-radius: 50%;
     transition: filter 0.2s;
-}
+} */
 
 #gridSize {
-    width: 120%;
+    width: 180%;
     appearance: none;
     height: 7px;
     border-radius: 5px;
@@ -178,7 +194,7 @@ a:hover, .icon:hover{
     border-radius: 7px;
     font-size: 20px;
     font-weight:600;
-    transition: filter 0.2s;
+    transition: filter 0.5s;
     cursor: pointer;
 }
 
@@ -187,20 +203,49 @@ a:hover, .icon:hover{
     transition: 0.15s;
 }
 
-.menuButton:active, #colorDisplay:active {
-    filter: brightness(97%);
-    transition: 0.1s;
+.menuButton.buttonlight:active, #colorDisplay:active {
+    background-color: #79AC78;
+    color: #D0E7D2;
+    filter: brightness(100%);
+    transition: 0.15s;
+}
+
+.menuButton.buttondark:active, #colorDisplay:active {
+    background-color: #79AC78;
+    color: #D0E7D2;
+    filter: brightness(100%);
+    transition: 0.15s;
+}
+
+.menuButton.modeactivelight {
+    background-color: #79AC78;
+    color: #D0E7D2;
+}
+
+.menuButton.modeactivedark {
+    background-color: white;
+    color: black;
 }
 
 #sketchBoard {
-    width: 500px;
+    display: flex;
+    flex-flow: column nowrap;
+    width: 600px;
     aspect-ratio: 1 / 1;
     background-color: #F5F5F5;
-    min-width: 500px;
+    min-width: 600px;
     cursor: url(./images/Colebemis-Feather-Pen-tool.png), url(./images/Colebemis-Feather-Pen-tool.svg), pointer;
 }
 
+.gridRow {
+    flex: 1 1 0;
+    display: flex;
+    flex-flow: row nowrap;
+}
 
+.gridItem {
+    flex: 1 1 0;
+}
 
 #footer {
     min-height: 50px;
