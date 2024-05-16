@@ -179,6 +179,7 @@ a:hover, .icon:hover{
     font-size: 20px;
     font-weight:600;
     transition: filter 0.2s;
+    cursor: pointer;
 }
 
 .menuButton:hover, #colorDisplay:hover {
@@ -196,6 +197,7 @@ a:hover, .icon:hover{
     aspect-ratio: 1 / 1;
     background-color: #F5F5F5;
     min-width: 500px;
+    cursor: url(./images/Colebemis-Feather-Pen-tool.png), url(./images/Colebemis-Feather-Pen-tool.svg), pointer;
 }
 
 
