@@ -88,7 +88,7 @@ a:hover, .icon:hover{
     padding: 4vh 0;
     min-height: 80px;
     flex: 0 1 fit-content;
-    width: 100vw;
+    width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -183,8 +183,18 @@ a:hover, .icon:hover{
     box-shadow: 0px 1px 5px rgba(24, 61, 61, 1);
 }
 
+#gridSizeButton {
+    display: none;
+}
+
+#gridLabel {
+    font-weight: 600;
+    font-size: 20px;
+}
+
 #gridSize {
     width: 180%;
+    margin: 10px 0;
     appearance: none;
     height: 7px;
     border-radius: 5px;
@@ -201,8 +211,8 @@ a:hover, .icon:hover{
 #gridSize::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     cursor: pointer;
   }
@@ -211,7 +221,7 @@ a:hover, .icon:hover{
     height: 40px;
     width: 180px;
     background: transparent;
-    border-width: 2px;
+    border-width: 4px;
     border-style: solid;
     border-radius: 7px;
     font-size: 20px;
@@ -258,6 +268,7 @@ a:hover, .icon:hover{
     background-color: rgba(245, 245, 245, 1);
     min-width: 600px;
     cursor: url(./images/Colebemis-Feather-Pen-tool.png), url(./images/Colebemis-Feather-Pen-tool.svg), pointer;
+    touch-action: none;
 }
 
 .gridRow {
@@ -272,7 +283,7 @@ a:hover, .icon:hover{
 
 #footer {
     min-height: 50px;
-    width: 100vw;
+    width: 100%;
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
@@ -296,3 +307,48 @@ a:hover, .icon:hover{
     justify-content: center;
 }
 
+@media only screen and (max-width: 900px)
+{
+    body {
+        width: 100vw;
+        height: 100vh;
+        min-height: max-content;
+        min-width: max-content;
+    }
+
+    #container1 {
+        flex-flow: column nowrap;
+        margin: 20px 50px;
+    }    
+    #menu {
+        order: 1;
+        flex-flow: row wrap;
+        width: 100%;
+        justify-content: center;
+        gap: 10px;
+    }
+    #menu > div {
+        height: 120px;
+        flex: 0 0 200px;
+        margin: 0;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    #gridLabel {
+        display: none;
+    }
+    #gridSizeButton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #gridSize {
+        width: 100%;
+    }
+    #gridContainer {
+        order: 3;
+    }
+    #colorPicker {
+        order: 1;
+    }
+}

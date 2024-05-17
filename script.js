@@ -2,10 +2,11 @@ const sketchBoard = document.querySelector("#sketchBoard");
 const colorPicker = document.querySelector('#colorPicker');
 const gridSize = document.querySelector('#gridSize');
 const gridSizeLabel = document.querySelector("#gridLabel");
+const gridSizeButton = document.querySelector("#gridSizeButton");
 const menuButtons = document.querySelectorAll(".menuButton");
 const colorButton = document.querySelector('#colorPickerButton');
 const eraserButton = document.querySelector("#eraserButton");
-// const clearButton = document.querySelector("#clearButton");
+const clearButton = document.querySelector("#clearButton");
 const themes = document.querySelectorAll(".themeSelector");
 const themeButton = document.querySelector("#themeContainer");
 const lightIcon = document.querySelector("#light");
@@ -28,10 +29,11 @@ let mode = 'color';
 
 focusButton(colorButton);
 currentFocusedButton = colorButton;
-setGrid(gridSize.value);
-gridSize.addEventListener('input', ()=>{gridSizeLabel.innerText = `${gridSize.value} x ${gridSize.value}`;});
-gridSize.addEventListener('click', ()=>{clearGrid();
-    setGrid(gridSize.value)});
+setNewGrid(gridSize.value);
+gridSize.addEventListener('input', ()=>{gridSizeLabel.innerText = `${gridSize.value} x ${gridSize.value}`;
+gridSizeButton.innerText = `${gridSize.value} x ${gridSize.value}`});
+gridSize.addEventListener('click', ()=>{setNewGrid(gridSize.value)});
+gridSizeButton.addEventListener('click', () => setNewGrid(gridSize.value));
 colorPicker.addEventListener('input', () => {color = colorPicker.value});
 colorButton.addEventListener('click', (e) => {mode = 'color';
     focusButton(e.target);
@@ -39,30 +41,38 @@ colorButton.addEventListener('click', (e) => {mode = 'color';
 eraserButton.addEventListener('click', (e) => {mode = 'eraser';
     focusButton(e.target);
     currentFocusedButton = e.target});
-clearButton.addEventListener('click', ()=> {clearGrid();
-    setGrid(gridSize.value);});
+clearButton.addEventListener('click', () => setNewGrid(gridSize.value));
 themeButton.addEventListener('click', toggleTheme);
+sketchBoard.addEventListener('touchstart', e=> {
+    e.preventDefault();
+    sketch(e.target);});
+sketchBoard.addEventListener('touchmove', e =>{
+    e.preventDefault();
+    const touch = e.touches[0];
+    const target = document.elementFromPoint(touch.clientX, touch.clientY);
+    // console.log('touch x: ' + touch.clientX + ' touch y: ' + touch.clientY + '\n' + pixel);
+    (target && sketchBoard.contains(target)) ? sketch(target) : null;});
 
-function setGrid(size){for(let i=0; i<size; i++){
+function setNewGrid(size){sketchBoard.innerHTML = '';
+    for(let i=0; i<size; i++){
     const row = document.createElement('div');
     row.setAttribute('class', 'gridRow'); 
     for(let j=0; j<size; j++){
             const gridItem = document.createElement('div');
             gridItem.setAttribute('class', 'gridItem');
-            gridItem.addEventListener('mouseover', sketch);
+            gridItem.addEventListener('mouseover', e=> sketch(e.target));
             row.appendChild(gridItem);}
     sketchBoard.appendChild(row);}}           
 function sketch(element){switch(mode){
     case 'color':
-        element.target.style.backgroundColor = color;
+        element.style.backgroundColor = color;
         break;
     case 'eraser':
-        element.target.style.backgroundColor = DEFAULT_COL;
+        element.style.backgroundColor = DEFAULT_COL;
         break;}}
 function focusButton(target){menuButtons.forEach(b => {b.classList.remove("modeactivelight", "modeactivedark")});
     if(theme === 'light') target.classList.add("modeactivelight");
     else target.classList.add("modeactivedark")}
-function clearGrid() {sketchBoard.innerHTML ='';}
 function toggleTheme()
 {
     if(theme == 'light'){
