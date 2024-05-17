@@ -46,16 +46,25 @@ a:hover, .icon:hover{
     box-shadow: 0px 0px 4px rgba(97, 130, 100, 0.5);
 }
 
-.sliderlight::-webkit-slider-thumb {
-    background: rgba(4, 13, 18, 1);
-}
 
 .sliderlight {
     background: rgba(92, 131, 116, 1);
 }
 
+.sliderlight::-webkit-slider-thumb {
+    background: rgba(4, 13, 18, 1);
+}
 .bgdark {
     background-color: rgba(11, 27, 36, 1);
+}
+
+.textdark {
+    color: rgba(147, 177, 166, 1);
+    fill: rgba(147, 177, 166, 1);
+}
+
+.borderdark {
+    border-color: rgba(147, 177, 166, 1);
 }
 
 .sliderdark {
@@ -81,12 +90,36 @@ a:hover, .icon:hover{
     flex: 0 1 fit-content;
     width: 100vw;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     font-size: calc(2vw + 3vh);
     font-weight: 600;
 }
 
+#themeContainer, #headerFixer {
+    width: calc(3vw + 5px);
+    height: calc(3vw + 5px);
+    min-width: 22px;
+    min-height: 22px;
+    font-size: calc(1vw + 1vh);
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+}
+
+#light, #dark {
+    height: 3vw;
+    width: 3vw;
+    min-width: 20px;
+    min-height: 20px;
+    position: absolute;
+    /* border-width: 10%; */
+    /* border-style: solid; */
+}
+
+#light {
+    opacity: 0;
+}
 
 #main {
     flex: 1 0 auto;
@@ -150,7 +183,6 @@ a:hover, .icon:hover{
     box-shadow: 0px 1px 5px rgba(24, 61, 61, 1);
 }
 
-
 #gridSize {
     width: 180%;
     appearance: none;
@@ -201,11 +233,12 @@ a:hover, .icon:hover{
 }
 
 .menuButton.buttondark:active, #colorDisplay:active {
-    background-color: rgba(121, 172, 120, 1);
-    color: rgba(208, 231, 210, 1);
+    background-color: rgba(147, 177, 166, 1);
+    color: rgba(11, 27, 36, 1);
     filter: brightness(100%);
     transition: 0.15s;
 }
+
 
 .menuButton.modeactivelight {
     background-color: rgba(120, 172, 119, 1);
@@ -213,8 +246,8 @@ a:hover, .icon:hover{
 }
 
 .menuButton.modeactivedark {
-    background-color: rgba(255, 255, 255, 1);
-    color: rgba(0, 0, 0, 1);
+    background-color: rgba(147, 177, 166, 1);
+    color: rgba(11, 27, 36, 1);
 }
 
 #sketchBoard {
