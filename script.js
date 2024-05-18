@@ -8,6 +8,7 @@ const eraserButton = document.querySelector("#eraserButton");
 // const colorIntensity = document.querySelector("#colorIntensity");
 // const intensityButton = document.querySelector("#intensityButton");
 // const intensityDisplay = document.querySelector("#intensityDisplay");
+const rainbowButton = document.querySelector("#rainbowButton");
 const clearButton = document.querySelector("#clearButton");
 const themeButton = document.querySelector("#themeContainer");
 const lightIcon = document.querySelector("#light");
@@ -16,7 +17,7 @@ const menuButtons = document.querySelectorAll(".menuButton");
 const themes = document.querySelectorAll(".themeSelector");
 const bgColorItems = document.querySelectorAll(".bglight");
 const textColorItems = document.querySelectorAll(".textlight");
-const hfColorItems = document.querySelectorAll(".hflight");
+// const hfColorItems = document.querySelectorAll(".hflight");
 const menuColorItems = document.querySelectorAll(".menulight");
 const borderColorItems = document.querySelectorAll(".borderlight");
 const buttonColorItems = document.querySelectorAll(".buttonlight");
@@ -26,6 +27,7 @@ let color = colorPicker.value;
 let currentFocusedButton;
 let theme = themes[0].id;
 let mode = 'color';
+let currentRainbow = [255, 0, 0];
 // let intensity = colorIntensity.value+`%`;
  
 focusButton(colorButton);
@@ -41,6 +43,9 @@ colorButton.addEventListener('click', (e) => {mode = 'color';
     focusButton(e.target);
     currentFocusedButton = e.target});
 eraserButton.addEventListener('click', (e) => {mode = 'eraser';
+    focusButton(e.target);
+    currentFocusedButton = e.target});
+rainbowButton.addEventListener('click', e => {mode = 'rainbow';
     focusButton(e.target);
     currentFocusedButton = e.target});
 // intensityButton.addEventListener('click', e => {mode = 'intensity';
@@ -77,7 +82,13 @@ function sketch(element){switch(mode){
         break;
     case 'eraser':
         element.style.backgroundColor = DEFAULT_COL;
-        break;}}
+        break;
+    case 'rainbow':
+        currentRainbow[0] = Math.max(0, Math.min(255, Math.floor(currentRainbow[0] + (Math.random() - 0.5) * 50)));
+        currentRainbow[1] = Math.max(0, Math.min(255, Math.floor(currentRainbow[1] + (Math.random() - 0.5) * 50)));
+        currentRainbow[2] = Math.max(0, Math.min(255, Math.floor(currentRainbow[2] + (Math.random() - 0.5) * 50)));
+        element.style.backgroundColor = `rgb(${currentRainbow[0]}, ${currentRainbow[1]}, ${currentRainbow[2]})`
+}}
 function focusButton(target){menuButtons.forEach(b => {b.classList.remove("modeactivelight", "modeactivedark")});
     if(theme === 'light') target.classList.add("modeactivelight");
     else target.classList.add("modeactivedark")}
@@ -89,7 +100,7 @@ function toggleTheme()
         theme = 'dark';
         bgColorItems.forEach(i => switchClass(i, 'bgdark', 'bglight'));
         textColorItems.forEach(i => switchClass(i, 'textdark', 'textlight'));
-        hfColorItems.forEach(i => switchClass(i, 'hfdark', 'hflight'));
+        // hfColorItems.forEach(i => switchClass(i, 'hfdark', 'hflight'));
         menuColorItems.forEach(i => switchClass(i, 'menudark', 'menulight'));
         borderColorItems.forEach(i => switchClass(i, 'borderdark', 'borderlight'));
         buttonColorItems.forEach(i => switchClass(i, 'buttondark', 'buttonlight'));
@@ -103,7 +114,7 @@ function toggleTheme()
         theme = 'light';
         bgColorItems.forEach(i => switchClass(i, 'bglight', 'bgdark'));
         textColorItems.forEach(i => switchClass(i, 'textlight', 'textdark'));
-        hfColorItems.forEach(i => switchClass(i, 'hflight', 'hfdark'));
+        // hfColorItems.forEach(i => switchClass(i, 'hflight', 'hfdark'));
         menuColorItems.forEach(i => switchClass(i, 'menulight', 'menudark'));
         borderColorItems.forEach(i => switchClass(i, 'borderlight', 'borderdark'));
         buttonColorItems.forEach(i => switchClass(i, 'buttonlight', 'buttondark'));
