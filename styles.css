@@ -166,9 +166,15 @@ a:hover, .icon:hover{
     gap: 10px;  
 }   
 
-#colorPicker {
-    height: 70px;
-    width: 70px;
+#colorPickerButton {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#colorPicker, #colorFixer {
+    height: 32px;
+    width: 32px;
     background: none;
 }
 
@@ -177,8 +183,8 @@ a:hover, .icon:hover{
 }
 #colorPicker::-webkit-color-swatch {
     border: none;
-    border-radius: 50%;
-    box-shadow: 0px 1px 5px rgba(24, 61, 61, 1);
+    border-radius: 20%;
+    box-shadow: 0px 1px 2px rgba(24, 61, 61, 1);
 }
 
 #gridSizeButton {
@@ -322,7 +328,16 @@ a:hover, .icon:hover{
         min-height: max-content;
         min-width: max-content;
     }
-
+    #colorPickerButton {
+        overflow: hidden;
+    }
+    #colorPicker, #colorFixer {
+        width: 27px;
+        height: 27px;
+    }
+    #colorPicker::-webkit-color-swatch {
+        border-radius: 50%;
+    }
     #container1 {
         flex-flow: column nowrap;
         margin: 20px 50px;
@@ -334,53 +349,53 @@ a:hover, .icon:hover{
         flex-flow: row wrap;
         width: 100%;
         justify-content: center;
+        align-items: flex-start;
         gap: 10px;
     }
     .menuItem {
-        height: 120px;
-        flex: 0 0 200px;
+        height: 80px;
+        /* flex: 0 0 190px; */
         margin: 0;
         align-items: center;
         justify-content: flex-start;
     }
+
+    /* .menuButton {
+        width: 160px;
+    } */
     #gridLabel {
         display: none;
     }
     #gridSizeButton {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        display: block;
+        /* justify-content: center;
+        align-items: center; */
     }
     .slider {
         width: 180px;
     }
     #gridContainer {
-        order: 3;
+        order: 4;
+        flex-direction: column-reverse;
     }
-    #colorPicker {
+    /* #colorPicker {
         order: 1;
+    } */
+    #intensityContainer {
+        order: 5;
+        flex-direction: column-reverse;
     }
  
 }
 
 @media only screen and (max-width: 700px) {
-    #colorContainer {
-        flex-flow: row nowrap;
-    }
     #sketchBoard {
         width: 400px;
         min-width: 400px;
     }
-
     .menuItem {
-        flex-flow: row nowrap;
         height: 80px;
-        justify-content: center;
-    }
-    #gridContainer {
-        flex-flow: column nowrap;
-    }
-    #clearContainer {
-        align-items: flex-end;
+        justify-content: flex-start;
+        align-items: center;
     }
 }   

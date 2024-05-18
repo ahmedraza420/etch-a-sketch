@@ -19,6 +19,7 @@ const bgColorItems = document.querySelectorAll(".bglight");
 const textColorItems = document.querySelectorAll(".textlight");
 // const hfColorItems = document.querySelectorAll(".hflight");
 const menuColorItems = document.querySelectorAll(".menulight");
+const sliders = document.querySelectorAll(".slider");
 const borderColorItems = document.querySelectorAll(".borderlight");
 const buttonColorItems = document.querySelectorAll(".buttonlight");
 
@@ -34,7 +35,7 @@ focusButton(colorButton);
 currentFocusedButton = colorButton;
 setNewGrid(gridSize.value);
 intensityDisplay.innerText = intensity * 100 + `%`;
-gridSize.addEventListener('input', ()=>{gridSizeLabel.innerText = `${gridSize.value} x ${gridSize.value}`;
+gridSize.addEventListener('input', ()=>{//gridSizeLabel.innerText = `${gridSize.value} x ${gridSize.value}`;
 gridSizeButton.innerText = `${gridSize.value} x ${gridSize.value}`});
 gridSize.addEventListener('click', ()=>{setNewGrid(gridSize.value)});
 gridSizeButton.addEventListener('click', () => setNewGrid(gridSize.value));
@@ -85,7 +86,7 @@ function setNewGrid(size){sketchBoard.innerHTML = '';
             row.appendChild(gridItem);}
     sketchBoard.appendChild(row);}}           
 function sketch(element){
-    console.time('sketch')
+    // console.time('sketch');
     switch(mode){
     case 'color':
         element.style.backgroundColor = color;
@@ -108,7 +109,7 @@ function sketch(element){
         element.style.opacity = element.currOpacity;
         element.style.backgroundColor = color;
         break;}
-        console.timeEnd('sketch');
+        // console.timeEnd('sketch');
 }
 function focusButton(target){menuButtons.forEach(b => {b.classList.remove("modeactivelight", "modeactivedark")});
     if(theme === 'light') target.classList.add("modeactivelight");
@@ -126,7 +127,7 @@ function toggleTheme()
         borderColorItems.forEach(i => switchClass(i, 'borderdark', 'borderlight'));
         buttonColorItems.forEach(i => switchClass(i, 'buttondark', 'buttonlight'));
         switchClass(currentFocusedButton, 'modeactivedark', 'modeactivelight');
-        switchClass(gridSize, 'sliderdark', 'sliderlight');
+        sliders.forEach(i => switchClass(i, 'sliderdark', 'sliderlight'));
     }
     else
     {
@@ -140,7 +141,7 @@ function toggleTheme()
         borderColorItems.forEach(i => switchClass(i, 'borderlight', 'borderdark'));
         buttonColorItems.forEach(i => switchClass(i, 'buttonlight', 'buttondark'));
         switchClass(currentFocusedButton, 'modeactivelight', 'modeactivedark');
-        switchClass(gridSize, 'sliderlight', 'sliderdark');
+        sliders.forEach(i => switchClass(i, 'sliderlight', 'sliderdark'));
     }
 }
 function switchClass(element, newClass, oldClass)
