@@ -13,7 +13,7 @@ body {
     flex-flow: column nowrap;
     align-items: center;
     justify-content: space-between;
-    overflow: auto;
+    overflow-x: hidden;
     min-height: 100vh;
     min-width: 100vw;
 }
@@ -108,13 +108,11 @@ a:hover, .icon:hover{
 }
 
 #light, #dark {
-    height: 3vw;
-    width: 3vw;
+    height: calc(2vw + 1vh);
+    width: calc(2vw + 1vh);
     min-width: 20px;
     min-height: 20px;
     position: absolute;
-    /* border-width: 10%; */
-    /* border-style: solid; */
 }
 
 #light {
@@ -320,6 +318,8 @@ a:hover, .icon:hover{
         flex-flow: column nowrap;
         margin: 20px 50px;
     }    
+
+    
     #menu {
         order: 1;
         flex-flow: row wrap;
@@ -327,7 +327,7 @@ a:hover, .icon:hover{
         justify-content: center;
         gap: 10px;
     }
-    #menu > div {
+    .menuItem {
         height: 120px;
         flex: 0 0 200px;
         margin: 0;
@@ -351,4 +351,27 @@ a:hover, .icon:hover{
     #colorPicker {
         order: 1;
     }
+ 
 }
+
+@media only screen and (max-width: 700px) {
+    #colorContainer {
+        flex-flow: row nowrap;
+    }
+    #sketchBoard {
+        width: 400px;
+        min-width: 400px;
+    }
+
+    .menuItem {
+        flex-flow: row nowrap;
+        height: 80px;
+        justify-content: center;
+    }
+    #gridContainer {
+        flex-flow: column nowrap;
+    }
+    #clearContainer {
+        align-items: flex-end;
+    }
+}   
