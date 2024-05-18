@@ -3,33 +3,35 @@ const colorPicker = document.querySelector('#colorPicker');
 const gridSize = document.querySelector('#gridSize');
 const gridSizeLabel = document.querySelector("#gridLabel");
 const gridSizeButton = document.querySelector("#gridSizeButton");
-const menuButtons = document.querySelectorAll(".menuButton");
 const colorButton = document.querySelector('#colorPickerButton');
 const eraserButton = document.querySelector("#eraserButton");
+// const colorIntensity = document.querySelector("#colorIntensity");
+// const intensityButton = document.querySelector("#intensityButton");
+// const intensityDisplay = document.querySelector("#intensityDisplay");
 const clearButton = document.querySelector("#clearButton");
-const themes = document.querySelectorAll(".themeSelector");
 const themeButton = document.querySelector("#themeContainer");
 const lightIcon = document.querySelector("#light");
 const darkIcon = document.querySelector("#dark");
+const menuButtons = document.querySelectorAll(".menuButton");
+const themes = document.querySelectorAll(".themeSelector");
 const bgColorItems = document.querySelectorAll(".bglight");
 const textColorItems = document.querySelectorAll(".textlight");
 const hfColorItems = document.querySelectorAll(".hflight");
 const menuColorItems = document.querySelectorAll(".menulight");
 const borderColorItems = document.querySelectorAll(".borderlight");
 const buttonColorItems = document.querySelectorAll(".buttonlight");
-// let bgColor = document.querySelector("body").style.backgroundColor;
-// let textColor = document.querySelector("body").style.color;
 
 const DEFAULT_COL = sketchBoard.style.backgroundColor; 
 let color = colorPicker.value;
-// let theme = themeButton.classList[0];
 let currentFocusedButton;
 let theme = themes[0].id;
 let mode = 'color';
-
+// let intensity = colorIntensity.value+`%`;
+ 
 focusButton(colorButton);
 currentFocusedButton = colorButton;
 setNewGrid(gridSize.value);
+// intensityDisplay.innerText = intensity;
 gridSize.addEventListener('input', ()=>{gridSizeLabel.innerText = `${gridSize.value} x ${gridSize.value}`;
 gridSizeButton.innerText = `${gridSize.value} x ${gridSize.value}`});
 gridSize.addEventListener('click', ()=>{setNewGrid(gridSize.value)});
@@ -41,6 +43,12 @@ colorButton.addEventListener('click', (e) => {mode = 'color';
 eraserButton.addEventListener('click', (e) => {mode = 'eraser';
     focusButton(e.target);
     currentFocusedButton = e.target});
+// intensityButton.addEventListener('click', e => {mode = 'intensity';
+//     focusButton(e.target);
+//     currentFocusedButton = e.target});
+//     colorIntensity.addEventListener('input', () => {
+//     intensity = colorIntensity.value / 100;
+// });
 clearButton.addEventListener('click', () => setNewGrid(gridSize.value));
 themeButton.addEventListener('click', toggleTheme);
 sketchBoard.addEventListener('touchstart', e=> {
@@ -50,8 +58,8 @@ sketchBoard.addEventListener('touchmove', e =>{
     e.preventDefault();
     const touch = e.touches[0];
     const target = document.elementFromPoint(touch.clientX, touch.clientY);
-    // console.log('touch x: ' + touch.clientX + ' touch y: ' + touch.clientY + '\n' + pixel);
     (target && sketchBoard.contains(target)) ? sketch(target) : null;});
+
 
 function setNewGrid(size){sketchBoard.innerHTML = '';
     for(let i=0; i<size; i++){
@@ -108,3 +116,10 @@ function switchClass(element, newClass, oldClass)
     element.classList.remove(oldClass);
     element.classList.add(newClass);
 }
+// function colorAtIntensity(color, currentColor, intensity)
+// {
+//     rgbObj = toRGB(color);
+//     currObj = toRGB(currentColor);
+//     const bgIntensity = DEFAULT_COL - (1 - intensity);
+//     return `rgb(${rgbObj[0]*intensity + currObj[0] + bgIntensity}, ${rgbObj[1]*intensity + currObj[1] + bgIntensity}, ${rgbObj[2]*intensity + currObj[2] + bgIntensity})`;
+// }

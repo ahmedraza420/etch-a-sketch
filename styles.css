@@ -190,8 +190,8 @@ a:hover, .icon:hover{
     font-size: 20px;
 }
 
-#gridSize {
-    width: 180%;
+.slider {
+    width: 200px;
     margin: 10px 0;
     appearance: none;
     height: 7px;
@@ -202,11 +202,11 @@ a:hover, .icon:hover{
     transition: opacity .2s;
 }
 
-#gridSize:hover {
+.slider:hover {
     opacity: 1;
 }
 
-#gridSize::-webkit-slider-thumb {
+.slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 20px;
@@ -214,6 +214,10 @@ a:hover, .icon:hover{
     border-radius: 50%;
     cursor: pointer;
   }
+
+/* #intensityDisplay {
+    width: 60px;
+} */
 
 .menuButton {
     height: 40px;
@@ -226,6 +230,10 @@ a:hover, .icon:hover{
     font-weight:600;
     transition: filter 0.5s;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
 }
 
 .menuButton:hover, #colorDisplay:hover {
@@ -277,6 +285,7 @@ a:hover, .icon:hover{
 
 .gridItem {
     flex: 1 1 0;
+    background-color: rgb(245, 245, 245);
 }
 
 #footer {
@@ -342,8 +351,8 @@ a:hover, .icon:hover{
         justify-content: center;
         align-items: center;
     }
-    #gridSize {
-        width: 100%;
+    .slider {
+        width: 180px;
     }
     #gridContainer {
         order: 3;
