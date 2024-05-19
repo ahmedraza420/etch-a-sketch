@@ -135,19 +135,36 @@ a:hover, .icon:hover{
     flex-flow: row wrap-reverse;
     justify-content: center;
     align-items: center;
-    gap: 2vw;
+    gap: 20px;
+}
+
+#container2 {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    /* min-height: inherit; */
+    height: inherit;
+}
+#colorPickerDiv {
+    flex: 0 0 0;
 }
 
 #menu, #container1fixer {
-    min-height: fit-content;
-    flex: 0 1 inherit;
-    min-width: 200px;
+    flex: 0 0 auto;   
+    /* min-height: inherit; */
+    /* min-width: 200px; */
     width: 230px;
     display: flex;
     flex-flow: column nowrap;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
-    gap: 10%;
+    gap: 10px;
+}
+
+#container1fixer {
+    height: fit-content;
 }
 
 #container1fixer {
@@ -155,15 +172,16 @@ a:hover, .icon:hover{
 }
 
 .menuItem {
-    flex: 0 1 fit-content;
+    flex: 0 0 auto;
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-start;
-    margin: 10%;
+    width: 230px;
+    /* margin: 10%; */
     align-items: center;
-    max-height: 15%;
-    height: 150px;
-    gap: 10px;  
+    /* max-height: 15%; */
+    height: 65px;
+    /* gap: 5px;   */
 }   
 
 #colorPickerButton {
@@ -173,8 +191,8 @@ a:hover, .icon:hover{
 }
 
 #colorPicker, #colorFixer {
-    height: 32px;
-    width: 32px;
+    height: 70px;
+    width: 70px;
     background: none;
 }
 
@@ -272,6 +290,13 @@ a:hover, .icon:hover{
     color: rgba(11, 27, 36, 1);
 }
 
+#colorIntensity {
+    display: none;
+    position: absolute;
+    z-index: 3;
+    margin-top: 50px;
+}
+
 #sketchBoard {
     display: flex;
     flex-flow: column nowrap;
@@ -332,14 +357,14 @@ a:hover, .icon:hover{
         overflow: hidden;
     }
     #colorPicker, #colorFixer {
-        width: 27px;
-        height: 27px;
+        width: 50px;
+        height: 50px;
     }
     #colorPicker::-webkit-color-swatch {
-        border-radius: 50%;
+        border-radius: 20%;
     }
     #container1 {
-        flex-flow: column nowrap;
+        flex-flow: column-reverse nowrap;
         margin: 20px 50px;
     }    
 
@@ -375,15 +400,16 @@ a:hover, .icon:hover{
         width: 180px;
     }
     #gridContainer {
-        order: 4;
+        /* order: 4; */
         flex-direction: column-reverse;
+        justify-content: flex-end;
     }
     /* #colorPicker {
         order: 1;
     } */
     #intensityContainer {
         order: 5;
-        flex-direction: column-reverse;
+        /* flex-direction: column-reverse; */
     }
  
 }
@@ -397,5 +423,32 @@ a:hover, .icon:hover{
         height: 80px;
         justify-content: flex-start;
         align-items: center;
+        width: 180px;
     }
 }   
+
+@media only screen and (max-width: 450px) {
+    #sketchBoard {
+        width: 300px;
+        min-width: 300px;
+    }
+    #colorPicker, #colorFixer {
+        width: 30px;
+        height: 30px;
+    }
+    .menuItem {
+        flex: 0 1 auto;
+        height: fit-content;
+        /* gap: 2px; */
+        width: fit-content;
+    }
+    .menuButton {
+        width: 140px;
+        font-size: 15px;
+        font-weight:600;
+        border-width: 3px;
+    }
+    .slider {
+        width: inherit;
+    }
+}

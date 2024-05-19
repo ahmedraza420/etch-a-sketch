@@ -42,7 +42,7 @@ gridSizeButton.addEventListener('click', () => setNewGrid(gridSize.value));
 colorPicker.addEventListener('input', () => {color = toRGB(colorPicker.value)});
 colorButton.addEventListener('click', (e) => {mode = 'color';
     focusButton(e.target);
-    currentFocusedButton = e.target});
+    });
 eraserButton.addEventListener('click', (e) => {mode = 'eraser';
     focusButton(e.target);
     currentFocusedButton = e.target});
@@ -51,7 +51,11 @@ rainbowButton.addEventListener('click', e => {mode = 'rainbow';
     currentFocusedButton = e.target});
 intensityButton.addEventListener('click', e => {mode = 'intensity';
     focusButton(e.target);
-    currentFocusedButton = e.target});
+    currentFocusedButton = e.target
+    colorIntensity.style.display = 'flex';
+    // console.log(colorIntensity);
+    
+});
     colorIntensity.addEventListener('input', () => {
     intensity = colorIntensity.value / 100;
 });
@@ -111,9 +115,11 @@ function sketch(element){
         break;}
         // console.timeEnd('sketch');
 }
-function focusButton(target){menuButtons.forEach(b => {b.classList.remove("modeactivelight", "modeactivedark")});
+function focusButton(target){menuButtons.forEach(b => {currentFocusedButton == target? null : b.classList.remove("modeactivelight", "modeactivedark")});
+    colorIntensity.style.display = 'none';
     if(theme === 'light') target.classList.add("modeactivelight");
-    else target.classList.add("modeactivedark")}
+    else target.classList.add("modeactivedark");
+    currentFocusedButton = target;}
 function toggleTheme()
 {
     if(theme == 'light'){

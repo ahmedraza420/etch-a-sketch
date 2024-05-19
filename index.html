@@ -21,31 +21,36 @@
     </div>
     <div id="main">
         <div id="container1">
-            <div id="menu" class="textlight">
-                <div id="gridContainer" class="menuItem menulight">
-                    <label for="gridsize" id="gridLabel" class="textlight">16 x 16</label>
-                    <input type="range" name="gridsize" id="gridSize" class="slider sliderlight" min="16" max="100" value="16" oninput="document.querySelector('#gridSizeButton').innerText = `Size ${this.value} x ${this.value0}`">
-                    <button id="gridSizeButton" class="borderlight buttonlight textlight menuButton">16 x 16</button>
+            <div id="container2">
+                <div id="colorPickerDiv">
+                    <input type="color" name="colorPicker" id="colorPicker" class="borderlight" value="#183D3D">
                 </div>
-                <div id="colorContainer" class="menuItem menulight">
-                    <button id="colorPickerButton" class="borderlight buttonlight menuButton textlight"><span id="colorFixer"></span>Color<input type="color" name="colorPicker" id="colorPicker" class="borderlight" value="#183D3D"></button>
+                <div id="menu" class="textlight">
+                    <div id="colorContainer" class="menuItem menulight">
+                        <button id="colorPickerButton" class="borderlight buttonlight menuButton textlight"><!--<span id="colorFixer"></span>-->Color</button>
+                    </div>
+                    <div id="eraserContainer" class="menuItem menulight">
+                        <button id="eraserButton" class="borderlight buttonlight menuButton textlight">Eraser</button>
+                    </div>
+                    <div id="rainbowContainer" class="menuItem menulight">
+                        <button id="rainbowButton" class="borderlight buttonlight menuButton textlight">Rainbow</button>
+                    </div>
+                    <div id="intensityContainer" class="menuItem menulight">
+                        <input type="range" id="colorIntensity" class="slider sliderlight" min="1" max="100" value="10" oninput="document.querySelector('#intensityDisplay').innerHTML = this.value+`%`">
+                        <button id="intensityButton" class="borderlight buttonlight textlight menuButton">Shading <span id="intensityDisplay">100%</span></button>
+                    </div>
+                    <div id="clearContainer" class="menuItem menulight">
+                        <button id="clearButton" class="borderlight buttonlight menuButton textlight">Clear</button>
+                    </div>
+                    <div id="gridContainer" class="menuItem menulight">
+                        <label for="gridsize" id="gridLabel" class="textlight">16 x 16</label>
+                        <input type="range" name="gridsize" id="gridSize" class="slider sliderlight" min="16" max="100" value="16" oninput="const size = `${this.value} x ${this.value}`; document.querySelector('#gridSizeButton').innerText = 'Size '+size; document.querySelector('#gridLabel').innerText = size">
+                        <button id="gridSizeButton" class="borderlight buttonlight textlight menuButton">16 x 16</button>
+                    </div>
                 </div>
-            <div id="eraserContainer" class="menuItem menulight">
-                <button id="eraserButton" class="borderlight buttonlight menuButton textlight">Eraser</button>
             </div>
-            <div id="rainbowContainer" class="menuItem menulight">
-                <button id="rainbowButton" class="borderlight buttonlight menuButton textlight">Rainbow</button>
-            </div>
-            <div id="intensityContainer" class="menuItem menulight">
-                <input type="range" id="colorIntensity" class="slider sliderlight" min="1" max="100" value="10" oninput="document.querySelector('#intensityDisplay').innerHTML = this.value+`%`">
-                <button id="intensityButton" class="borderlight buttonlight textlight menuButton">Shading <span id="intensityDisplay">100%</span></button>
-            </div>
-            <div id="clearContainer" class="menuItem menulight">
-                <button id="clearButton" class="borderlight buttonlight menuButton textlight">Clear</button>
-            </div>
-            </div>
-            <div id="sketchBoard" class="shadowlight"></div>
-            <div id="container1fixer"></div>
+        <div id="sketchBoard" class="shadowlight"></div>
+        <div id="container1fixer"></div>
         </div>
     </div>
     <div id="footer" class="textlight">
