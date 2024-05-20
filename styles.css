@@ -163,6 +163,12 @@ a:hover, .icon:hover{
     gap: 10px;
 }
 
+#container3 {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 10px;
+}
+
 #container1fixer {
     height: fit-content;
 }
@@ -209,9 +215,13 @@ a:hover, .icon:hover{
     display: none;
 }
 
+
+
 #gridLabel {
     font-weight: 600;
     font-size: 20px;
+    width: 100%;
+    text-align: center;
 }
 
 .slider {
@@ -308,6 +318,18 @@ a:hover, .icon:hover{
     touch-action: none;
 }
 
+#gridContainer {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#gridSize {
+    flex: 1 0 auto;
+
+}
 .gridRow {
     flex: 1 1 0;
     display: flex;
@@ -367,6 +389,9 @@ a:hover, .icon:hover{
         flex-flow: column-reverse nowrap;
         margin: 20px 50px;
     }    
+    #container1fixer {
+        display: none;
+    }
 
     
     #menu {
@@ -391,8 +416,14 @@ a:hover, .icon:hover{
     #gridLabel {
         display: none;
     }
+    #gridSize {
+        /* flex: 0 0 auto; */
+        flex: 1 1 auto;
+    }
     #gridSizeButton {
         display: block;
+        width: 100px;
+        font-size: 18px;
         /* justify-content: center;
         align-items: center; */
     }
@@ -401,8 +432,11 @@ a:hover, .icon:hover{
     }
     #gridContainer {
         /* order: 4; */
-        flex-direction: column-reverse;
+        /* flex-direction: column-reverse; */
+        flex-flow: row nowrap;
         justify-content: flex-end;
+        width: 100%;
+        gap: 10px;
     }
     /* #colorPicker {
         order: 1;
@@ -450,5 +484,8 @@ a:hover, .icon:hover{
     }
     .slider {
         width: inherit;
+    }
+    #gridSizeButton {
+        font-size: 13px;    
     }
 }
