@@ -7,7 +7,6 @@
     box-sizing: border-box;
     font-family:     sans-serif;
 }
-
 body {
     display: flex;
     flex-flow: column nowrap;
@@ -17,73 +16,57 @@ body {
     min-height: 100vh;
     min-width: 100vw;
 }
-
 a, a:visited {
     color: inherit;
     text-shadow: none;
 }
-
 a:hover, .icon:hover{
     filter: drop-shadow(1px 2px 1px rgba(208, 231, 210, 1));
     text-shadow: 1px 2px 1px rgba(208, 231, 210, 1);
     transition: 0.3s;
 }
-
 .bglight {
     background-color: rgba(208, 231, 210, 1);
 }
-
 .textlight {
     color: rgba(97, 130, 100, 1);
     fill: rgba(97, 130, 100, 1);
 }
-
 .borderlight {
     border-color: rgba(121, 172, 120, 1);
 }
-
 .shadowlight {
     box-shadow: 0px 0px 4px rgba(97, 130, 100, 0.5);
 }
-
-
 .sliderlight {
     background: rgba(92, 131, 116, 1);
 }
-
 .sliderlight::-webkit-slider-thumb {
     background: rgba(4, 13, 18, 1);
 }
 .bgdark {
     background-color: rgba(11, 27, 36, 1);
 }
-
 .textdark {
     color: rgba(147, 177, 166, 1);
     fill: rgba(147, 177, 166, 1);
 }
-
 .borderdark {
     border-color: rgba(147, 177, 166, 1);
 }
-
 .sliderdark {
     background: rgba(24, 61, 61, 1);
     
 }
-
 .sliderdark::-webkit-slider-thumb {
     background: rgba(147, 177, 166, 1);
 }
-
 .hflight {
     background-color: rgba(176, 217, 177, 1);
 }
-
 .hfdark {
     background-color: rgba(24, 61, 61, 1);
 }
-
 #header {
     padding: 4vh 0;
     min-height: 80px;
@@ -95,7 +78,6 @@ a:hover, .icon:hover{
     font-size: calc(2vw + 3vh);
     font-weight: 600;
 }
-
 #themeContainer, #headerFixer {
     width: calc(3vw + 5px);
     height: calc(3vw + 5px);
@@ -106,7 +88,6 @@ a:hover, .icon:hover{
     justify-content: center;
     align-items: center;   
 }
-
 #light, #dark {
     height: calc(2vw + 1vh);
     width: calc(2vw + 1vh);
@@ -114,11 +95,9 @@ a:hover, .icon:hover{
     min-height: 20px;
     position: absolute;
 }
-
 #light {
     opacity: 0;
 }
-
 #main {
     flex: 1 0 auto;
     width: 100vw;
@@ -126,7 +105,6 @@ a:hover, .icon:hover{
     justify-content: center;
     align-items: center;
 }
-
 #container1 {
     width: 1200px;
     min-height: 600px;
@@ -137,24 +115,19 @@ a:hover, .icon:hover{
     align-items: center;
     gap: 20px;
 }
-
 #container2 {
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
     align-items: center;
     gap: 10px;
-    /* min-height: inherit; */
     height: inherit;
 }
 #colorPickerDiv {
     flex: 0 0 0;
 }
-
 #menu, #container1fixer {
     flex: 0 0 auto;   
-    /* min-height: inherit; */
-    /* min-width: 200px; */
     width: 230px;
     display: flex;
     flex-flow: column nowrap;
@@ -162,46 +135,36 @@ a:hover, .icon:hover{
     align-items: center;
     gap: 10px;
 }
-
 #container3 {
     display: flex;
     flex-flow: column nowrap;
     gap: 10px;
 }
-
 #container1fixer {
     height: fit-content;
 }
-
 #container1fixer {
     min-height: 0;        
 }
-
 .menuItem {
     flex: 0 0 auto;
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-start;
     width: 230px;
-    /* margin: 10%; */
     align-items: center;
-    /* max-height: 15%; */
     height: 65px;
-    /* gap: 5px;   */
 }   
-
 #colorPickerButton {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
 }
-
 #colorPicker, #colorFixer {
     height: 70px;
     width: 70px;
     background: none;
 }
-
 #colorPicker::-webkit-color-swatch-wrapper {
     padding: 0;
 }
@@ -210,20 +173,15 @@ a:hover, .icon:hover{
     border-radius: 20%;
     box-shadow: 0px 1px 2px rgba(24, 61, 61, 1);
 }
-
 #gridSizeButton {
     display: none;
 }
-
-
-
 #gridLabel {
     font-weight: 600;
     font-size: 20px;
     width: 100%;
     text-align: center;
 }
-
 .slider {
     width: 200px;
     margin: 10px 0;
@@ -235,11 +193,9 @@ a:hover, .icon:hover{
     -webkit-transition: .2s;
     transition: opacity .2s;
 }
-
 .slider:hover {
     opacity: 1;
 }
-
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
@@ -247,12 +203,7 @@ a:hover, .icon:hover{
     height: 20px;
     border-radius: 50%;
     cursor: pointer;
-  }
-
-/* #intensityDisplay {
-    width: 60px;
-} */
-
+}
 .menuButton {
     height: 40px;
     width: 180px;
@@ -269,44 +220,36 @@ a:hover, .icon:hover{
     align-items: center;
     gap: 5px;
 }
-
 .menuButton:hover, #colorDisplay:hover {
     filter: brightness(120%);
     transition: 0.15s;
 }
-
 .menuButton.buttonlight:active, #colorDisplay:active {
     background-color: rgba(121, 172, 120, 1);
     color: rgba(208, 231, 210, 1);
     filter: brightness(100%);
     transition: 0.15s;
 }
-
 .menuButton.buttondark:active, #colorDisplay:active {
     background-color: rgba(147, 177, 166, 1);
     color: rgba(11, 27, 36, 1);
     filter: brightness(100%);
     transition: 0.15s;
 }
-
-
 .menuButton.modeactivelight {
     background-color: rgba(120, 172, 119, 1);
     color: rgba(208, 231, 210, 1);
 }
-
 .menuButton.modeactivedark {
     background-color: rgba(147, 177, 166, 1);
     color: rgba(11, 27, 36, 1);
 }
-
 #colorIntensity {
     display: none;
     position: absolute;
     z-index: 3;
     margin-top: 50px;
 }
-
 #sketchBoard {
     display: flex;
     flex-flow: column nowrap;
@@ -317,7 +260,6 @@ a:hover, .icon:hover{
     cursor: url(./images/Colebemis-Feather-Pen-tool.png), url(./images/Colebemis-Feather-Pen-tool.svg), pointer;
     touch-action: none;
 }
-
 #gridContainer {
     width: 100%;
     display: flex;
@@ -325,7 +267,6 @@ a:hover, .icon:hover{
     justify-content: center;
     align-items: center;
 }
-
 #gridSize {
     flex: 1 0 auto;
 
@@ -335,12 +276,10 @@ a:hover, .icon:hover{
     display: flex;
     flex-flow: row nowrap;
 }
-
 .gridItem {
     flex: 1 1 0;
     background-color: rgb(245, 245, 245);
 }
-
 #footer {
     min-height: 50px;
     width: 100%;
@@ -350,7 +289,6 @@ a:hover, .icon:hover{
     align-items: center;
     font-weight: 500;
 }
-
 #copyRights {
     display: flex;
     flex-flow: row nowrap;
@@ -358,7 +296,6 @@ a:hover, .icon:hover{
     align-items: center;
     justify-content: center;
 }
-
 #contactLink {
     display: flex;
     flex-flow: row nowrap;
@@ -378,7 +315,7 @@ a:hover, .icon:hover{
     #colorPickerButton {
         overflow: hidden;
     }
-    #colorPicker, #colorFixer {
+    #colorPicker{
         width: 50px;
         height: 50px;
     }
@@ -392,8 +329,6 @@ a:hover, .icon:hover{
     #container1fixer {
         display: none;
     }
-
-    
     #menu {
         order: 1;
         flex-flow: row wrap;
@@ -409,41 +344,28 @@ a:hover, .icon:hover{
         align-items: center;
         justify-content: flex-start;
     }
-
-    /* .menuButton {
-        width: 160px;
-    } */
     #gridLabel {
         display: none;
     }
     #gridSize {
-        /* flex: 0 0 auto; */
         flex: 1 1 auto;
     }
     #gridSizeButton {
         display: block;
         width: 100px;
         font-size: 18px;
-        /* justify-content: center;
-        align-items: center; */
     }
     .slider {
         width: 180px;
     }
     #gridContainer {
-        /* order: 4; */
-        /* flex-direction: column-reverse; */
         flex-flow: row nowrap;
         justify-content: flex-end;
         width: 100%;
         gap: 10px;
     }
-    /* #colorPicker {
-        order: 1;
-    } */
     #intensityContainer {
         order: 5;
-        /* flex-direction: column-reverse; */
     }
  
 }
@@ -466,14 +388,13 @@ a:hover, .icon:hover{
         width: 300px;
         min-width: 300px;
     }
-    #colorPicker, #colorFixer {
+    #colorPicker{
         width: 30px;
         height: 30px;
     }
     .menuItem {
         flex: 0 1 auto;
         height: fit-content;
-        /* gap: 2px; */
         width: fit-content;
     }
     .menuButton {

@@ -5,6 +5,7 @@ const gridSizeLabel = document.querySelector("#gridLabel");
 const gridSizeButton = document.querySelector("#gridSizeButton");
 const colorButton = document.querySelector('#colorPickerButton');
 const eraserButton = document.querySelector("#eraserButton");
+const softEraserButton = document.querySelector('#softEraserButton');
 const colorIntensity = document.querySelector("#colorIntensity");
 const intensityButton = document.querySelector("#intensityButton");
 const intensityDisplay = document.querySelector("#intensityDisplay");
@@ -17,13 +18,13 @@ const menuButtons = document.querySelectorAll(".menuButton");
 const themes = document.querySelectorAll(".themeSelector");
 const bgColorItems = document.querySelectorAll(".bglight");
 const textColorItems = document.querySelectorAll(".textlight");
-// const hfColorItems = document.querySelectorAll(".hflight");
 const menuColorItems = document.querySelectorAll(".menulight");
 const sliders = document.querySelectorAll(".slider");
 const borderColorItems = document.querySelectorAll(".borderlight");
 const buttonColorItems = document.querySelectorAll(".buttonlight");
 
 const DEFAULT_COL = sketchBoard.style.backgroundColor; 
+const SOFT_ERASER_INTENSITY = 0.25;
 let color;
 let currentFocusedButton;
 let theme = themes[0].id;
@@ -35,15 +36,18 @@ focusButton(colorButton);
 currentFocusedButton = colorButton;
 setNewGrid(gridSize.value);
 intensityDisplay.innerText = intensity * 100 + `%`;
-gridSize.addEventListener('input', ()=>{//gridSizeLabel.innerText = `${gridSize.value} x ${gridSize.value}`;
+gridSize.addEventListener('input', ()=>{
 gridSizeButton.innerText = `${gridSize.value} x ${gridSize.value}`});
 gridSize.addEventListener('click', ()=>{setNewGrid(gridSize.value)});
 gridSizeButton.addEventListener('click', () => setNewGrid(gridSize.value));
 colorPicker.addEventListener('input', () => {color = toRGB(colorPicker.value)});
-colorButton.addEventListener('click', (e) => {mode = 'color';
+colorButton.addEventListener('click', e => {mode = 'color';
     focusButton(e.target);
     });
-eraserButton.addEventListener('click', (e) => {mode = 'eraser';
+eraserButton.addEventListener('click', e => {mode = 'eraser';
+    focusButton(e.target);
+    currentFocusedButton = e.target});
+softEraserButton.addEventListener('click', e => {mode = 'soft';
     focusButton(e.target);
     currentFocusedButton = e.target});
 rainbowButton.addEventListener('click', e => {mode = 'rainbow';
@@ -53,8 +57,6 @@ intensityButton.addEventListener('click', e => {mode = 'intensity';
     focusButton(e.target);
     currentFocusedButton = e.target
     colorIntensity.style.display = 'flex';
-    // console.log(colorIntensity);
-    
 });
     colorIntensity.addEventListener('input', () => {
     intensity = colorIntensity.value / 100;
@@ -90,7 +92,6 @@ function setNewGrid(size){sketchBoard.innerHTML = '';
             row.appendChild(gridItem);}
     sketchBoard.appendChild(row);}}           
 function sketch(element){
-    // console.time('sketch');
     switch(mode){
     case 'color':
         element.style.backgroundColor = color;
@@ -109,11 +110,19 @@ function sketch(element){
         break;
     case 'intensity':
         element.style.backgroundColor != color ? element.currOpacity = 0 : null;
-        element.currOpacity = element.currOpacity + intensity;
-        element.style.opacity = element.currOpacity;
-        element.style.backgroundColor = color;
-        break;}
-        // console.timeEnd('sketch');
+        if (element.currOpacity + intensity <= 1)
+        {
+            element.currOpacity = element.currOpacity + intensity;
+            element.style.backgroundColor = color;
+        }
+        else element.currOpacity = 1;
+            element.style.opacity = element.currOpacity;
+        break;
+    case 'soft':
+        if (element.style.opacity - SOFT_ERASER_INTENSITY >= 0){
+            element.currOpacity = element.style.opacity - SOFT_ERASER_INTENSITY;
+            element.style.opacity = element.currOpacity;}
+        else element.style.backgroundColor = DEFAULT_COL}
 }
 function focusButton(target){menuButtons.forEach(b => {currentFocusedButton == target? null : b.classList.remove("modeactivelight", "modeactivedark")});
     colorIntensity.style.display = 'none';
@@ -128,7 +137,6 @@ function toggleTheme()
         theme = 'dark';
         bgColorItems.forEach(i => switchClass(i, 'bgdark', 'bglight'));
         textColorItems.forEach(i => switchClass(i, 'textdark', 'textlight'));
-        // hfColorItems.forEach(i => switchClass(i, 'hfdark', 'hflight'));
         menuColorItems.forEach(i => switchClass(i, 'menudark', 'menulight'));
         borderColorItems.forEach(i => switchClass(i, 'borderdark', 'borderlight'));
         buttonColorItems.forEach(i => switchClass(i, 'buttondark', 'buttonlight'));
@@ -142,7 +150,6 @@ function toggleTheme()
         theme = 'light';
         bgColorItems.forEach(i => switchClass(i, 'bglight', 'bgdark'));
         textColorItems.forEach(i => switchClass(i, 'textlight', 'textdark'));
-        // hfColorItems.forEach(i => switchClass(i, 'hflight', 'hfdark'));
         menuColorItems.forEach(i => switchClass(i, 'menulight', 'menudark'));
         borderColorItems.forEach(i => switchClass(i, 'borderlight', 'borderdark'));
         buttonColorItems.forEach(i => switchClass(i, 'buttonlight', 'buttondark'));
@@ -155,12 +162,4 @@ function switchClass(element, newClass, oldClass)
     element.classList.remove(oldClass);
     element.classList.add(newClass);
 }
-// function colorAtIntensity(color, currentColor, intensity)
-// {
-//     rgbObj = toRGB(color);
-//     currObj = toRGB(currentColor);
-//     const bgIntensity = DEFAULT_COL - (1 - intensity);
-//     return `rgb(${rgbObj[0]*intensity + currObj[0] + bgIntensity}, ${rgbObj[1]*intensity + currObj[1] + bgIntensity}, ${rgbObj[2]*intensity + currObj[2] + bgIntensity})`;
-// }
-
 color = toRGB(colorPicker.value);
