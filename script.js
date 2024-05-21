@@ -25,8 +25,7 @@ const buttonColorItems = document.querySelectorAll(".buttonlight");
 
 const DEFAULT_COL = sketchBoard.style.backgroundColor; 
 const SOFT_ERASER_INTENSITY = 0.25;
-let color;
-let currentFocusedButton;
+let color, currentFocusedButton, pixelStart = null, pixelEnd = null;
 let theme = themes[0].id;
 let mode = 'color';
 let currentRainbow = [255, 0, 0];
@@ -71,7 +70,10 @@ sketchBoard.addEventListener('touchmove', e =>{
     const touch = e.touches[0];
     const target = document.elementFromPoint(touch.clientX, touch.clientY);
     (target && sketchBoard.contains(target)) ? sketch(target) : null;});
-
+sketchBoard.addEventListener('mouseleave', e => {
+    pixelStart = null;
+    pixelEnd = null;
+});
 
 const toRGB = (hex) => {
     const r = parseInt(hex.slice(1, 3), 16)
@@ -88,10 +90,22 @@ function setNewGrid(size){sketchBoard.innerHTML = '';
             const gridItem = document.createElement('div');
             gridItem.setAttribute('class', 'gridItem');
             gridItem.addEventListener('mouseover', e=> sketch(e.target));
-            gridItem.currOpacity = 0; //opacity multiplier   
+            gridItem.currOpacity = 0; //opacity multiplier  
+            gridItem.x = j;
+            gridItem.y = i; 
             row.appendChild(gridItem);}
     sketchBoard.appendChild(row);}}           
-function sketch(element){
+function sketch(element, est = false){
+    if (est == false)
+        {
+            pixelStart = pixelEnd;
+            pixelEnd = element;
+    // console.log(pixelStart.x + ',' + pixelStart.y + ' - ' + pixelEnd.x + ',' + pixelEnd.y);
+        if (pixelEnd != null && pixelStart != null)
+            {
+                estimate(pixelStart.x, pixelStart.y, pixelEnd.x, pixelEnd.y);
+            }
+        }
     switch(mode){
     case 'color':
         element.style.backgroundColor = color;
@@ -123,6 +137,27 @@ function sketch(element){
             element.currOpacity = element.style.opacity - SOFT_ERASER_INTENSITY;
             element.style.opacity = element.currOpacity;}
         else element.style.backgroundColor = DEFAULT_COL}
+}
+function estimate(x1, y1, x2, y2) // similar method to DDA Line Algorithm
+{
+    const delx = Math.abs(x1-x2), dely = Math.abs(y1 - y2);
+            const maxPix = Math.max(Math.abs(x1 - x2), Math.abs(y1 - y2));
+            const incX = delx/maxPix, incY = dely/maxPix;
+            const sinx = x1 - x2 < 0 ? 1 : -1;
+            const siny = y1 - y2 < 0 ? 1 : -1;
+
+            let i = 0;
+            while (i < maxPix - 1)
+            {
+                x1 = x1 + sinx * incX;
+                y1 = y1 + siny * incY;
+                sketch(getPixel(Math.floor(x1), Math.floor(y1)));
+                i++;
+            }
+}
+function getPixel (x, y)
+{
+    return sketchBoard.children[y].children[x];
 }
 function focusButton(target){menuButtons.forEach(b => {currentFocusedButton == target? null : b.classList.remove("modeactivelight", "modeactivedark")});
     colorIntensity.style.display = 'none';
