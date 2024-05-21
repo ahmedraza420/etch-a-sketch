@@ -28,7 +28,7 @@ const SOFT_ERASER_INTENSITY = 0.25;
 let color, currentFocusedButton, pixelStart = null, pixelEnd = null;
 let theme = themes[0].id;
 let mode = 'color';
-let currentRainbow = [255, 0, 0];
+let currentRainbow = [Math.random() * 255, Math.random() * 255, Math.random() * 255];
 let intensity = colorIntensity.value/100;
 
 focusButton(colorButton);
@@ -70,9 +70,11 @@ sketchBoard.addEventListener('touchmove', e =>{
     const touch = e.touches[0];
     const target = document.elementFromPoint(touch.clientX, touch.clientY);
     (target && sketchBoard.contains(target)) ? sketch(target) : null;});
+sketchBoard.addEventListener('touchend', e => {
+    pixelStart = null, pixelEnd = null;
+});
 sketchBoard.addEventListener('mouseleave', e => {
-    pixelStart = null;
-    pixelEnd = null;
+    pixelStart = null, pixelEnd = null;
 });
 
 const toRGB = (hex) => {
