@@ -131,10 +131,7 @@ function sketch(element, est = false){
     case 'rainbow':
         element.currOpacity = 0;
         element.style.opacity = 1;
-        currentRainbow[0] = Math.max(0, Math.min(255, Math.floor(currentRainbow[0] + (Math.random() - 0.5) * 64)));
-        currentRainbow[1] = Math.max(0, Math.min(255, Math.floor(currentRainbow[1] + (Math.random() - 0.5) * 64)));
-        currentRainbow[2] = Math.max(0, Math.min(255, Math.floor(currentRainbow[2] + (Math.random() - 0.5) * 64)));
-        element.style.backgroundColor = `rgb(${currentRainbow[0]}, ${currentRainbow[1]}, ${currentRainbow[2]})`;
+        element.style.backgroundColor = getCloseRandom();
         break;
     case 'intensity':
         element.style.backgroundColor != color ? element.currOpacity = 0 : null;
@@ -147,10 +144,16 @@ function sketch(element, est = false){
             element.style.opacity = element.currOpacity;
         break;
     case 'soft':
-        if (element.style.opacity - SOFT_ERASER_INTENSITY >= 0){
+        if (element.style.opacity - SOFT_ERASER_INTENSITY >= 0 && element.style.backgroundColor != DEFAULT_COL){
             element.currOpacity = element.style.opacity - SOFT_ERASER_INTENSITY;
             element.style.opacity = element.currOpacity;}
-        else element.style.backgroundColor = DEFAULT_COL}
+        else {element.style.backgroundColor = DEFAULT_COL; element.style.opacity = 1;}}
+}
+function getCloseRandom (delta = 64) {
+    currentRainbow[0] = Math.max(0, Math.min(255, Math.floor(currentRainbow[0] + (Math.random() - 0.5) * delta)));
+    currentRainbow[1] = Math.max(0, Math.min(255, Math.floor(currentRainbow[1] + (Math.random() - 0.5) * delta)));
+    currentRainbow[2] = Math.max(0, Math.min(255, Math.floor(currentRainbow[2] + (Math.random() - 0.5) * delta)));
+    return `rgb(${currentRainbow[0]}, ${currentRainbow[1]}, ${currentRainbow[2]})`;
 }
 function estimate(x1, y1, x2, y2) // A function to interpolate pixels
 {
