@@ -79,7 +79,6 @@ const toRGB = (hex) => {
     const r = parseInt(hex.slice(1, 3), 16)
     const g = parseInt(hex.slice(3, 5), 16)
     const b = parseInt(hex.slice(5, 7), 16)
-    // return {r, g, b} // return an object
     return `rgb(${r}, ${g}, ${b})`;
 }    
 function setNewGrid(size){sketchBoard.innerHTML = '';
@@ -90,7 +89,7 @@ function setNewGrid(size){sketchBoard.innerHTML = '';
             const gridItem = document.createElement('div');
             gridItem.setAttribute('class', 'gridItem');
             gridItem.addEventListener('mouseover', e=> sketch(e.target));
-            gridItem.currOpacity = 0; //opacity multiplier  
+            gridItem.currOpacity = 0;
             gridItem.x = j;
             gridItem.y = i; 
             row.appendChild(gridItem);}
@@ -100,7 +99,6 @@ function sketch(element, est = false){
         {
             pixelStart = pixelEnd;
             pixelEnd = element;
-    // console.log(pixelStart.x + ',' + pixelStart.y + ' - ' + pixelEnd.x + ',' + pixelEnd.y);
         if (pixelEnd != null && pixelStart != null)
             {
                 estimate(pixelStart.x, pixelStart.y, pixelEnd.x, pixelEnd.y);
@@ -138,20 +136,20 @@ function sketch(element, est = false){
             element.style.opacity = element.currOpacity;}
         else element.style.backgroundColor = DEFAULT_COL}
 }
-function estimate(x1, y1, x2, y2) // similar method to DDA Line Algorithm
+function estimate(x1, y1, x2, y2) // A function to interpolate pixels
 {
+    // similar method to DDA Line Algorithm 
     const delx = Math.abs(x1-x2), dely = Math.abs(y1 - y2);
             const maxPix = Math.max(Math.abs(x1 - x2), Math.abs(y1 - y2));
             const incX = delx/maxPix, incY = dely/maxPix;
             const sinx = x1 - x2 < 0 ? 1 : -1;
             const siny = y1 - y2 < 0 ? 1 : -1;
-
             let i = 0;
             while (i < maxPix - 1)
             {
                 x1 = x1 + sinx * incX;
                 y1 = y1 + siny * incY;
-                sketch(getPixel(Math.floor(x1), Math.floor(y1)));
+                sketch(getPixel(Math.floor(x1), Math.floor(y1)), true);
                 i++;
             }
 }
