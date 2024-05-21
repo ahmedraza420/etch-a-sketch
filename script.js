@@ -25,11 +25,23 @@ const buttonColorItems = document.querySelectorAll(".buttonlight");
 
 const DEFAULT_COL = sketchBoard.style.backgroundColor; 
 const SOFT_ERASER_INTENSITY = 0.25;
-let color, currentFocusedButton, pixelStart = null, pixelEnd = null, pixelClicked = false;
+let color, currentFocusedButton, pixelStart = null, pixelEnd = null, pixelClicked = false, clickReleased = false;
 let theme = themes[0].id;
 let mode = 'color';
 let currentRainbow = [Math.random() * 255, Math.random() * 255, Math.random() * 255];
 let intensity = colorIntensity.value/100;
+let beforeMouseHover = {
+    backgroundColor : null,
+    opacity : 1, 
+}, 
+currModeColor = {
+    color : null,
+    eraser : DEFAULT_COL,
+    rainbow : getCloseRandom(),
+    intensity : color,
+    soft : SOFT_ERASER_INTENSITY,
+    opacity : 1,
+};
 
 focusButton(colorButton);
 currentFocusedButton = colorButton;
@@ -43,7 +55,7 @@ gridSize.addEventListener('click', ()=>{setNewGrid(gridSize.value);
 gridSizeButton.addEventListener('click', () => {setNewGrid(gridSize.value)
     pixelClicked = false;
 });
-colorPicker.addEventListener('input', () => {color = toRGB(colorPicker.value)});
+colorPicker.addEventListener('input', () => {color = toRGB(colorPicker.value); currModeColor[color] = color;});
 colorButton.addEventListener('click', e => {mode = 'color';
     focusButton(e.target);
     });
@@ -55,7 +67,8 @@ softEraserButton.addEventListener('click', e => {mode = 'soft';
     currentFocusedButton = e.target});
 rainbowButton.addEventListener('click', e => {mode = 'rainbow';
     focusButton(e.target);
-    currentFocusedButton = e.target});
+    currentFocusedButton = e.target
+    currModeColor.rainbow = getCloseRandom(255)});
 intensityButton.addEventListener('click', e => {mode = 'intensity';
     focusButton(e.target);
     currentFocusedButton = e.target
@@ -63,6 +76,7 @@ intensityButton.addEventListener('click', e => {mode = 'intensity';
 });
     colorIntensity.addEventListener('input', () => {
     intensity = colorIntensity.value / 100;
+    currModeColor.intensity = intensity;
 });
 clearButton.addEventListener('click', () => {setNewGrid(gridSize.value)
     pixelClicked = false;
@@ -101,14 +115,37 @@ function setNewGrid(size){sketchBoard.innerHTML = '';
                 pixelStart = null, pixelEnd = null;
             });
             gridItem.addEventListener('mouseover', e=> sketch(e.target));
+            gridItem.addEventListener('mouseleave', e => {
+                if (!pixelClicked && !clickReleased) {
+                    gridItem.style.backgroundColor = beforeMouseHover.backgroundColor;
+                    gridItem.style.opacity = beforeMouseHover.opacity;
+                }
+                clickReleased = false;
+            });
+            gridItem.addEventListener('mouseup', e => {clickReleased = true});
             gridItem.currOpacity = 0;
             gridItem.x = j;
             gridItem.y = i; 
             row.appendChild(gridItem);}
     sketchBoard.appendChild(row);}}           
 function sketch(element, est = false){
-    if (pixelClicked == false) return;
-    if (est == false)
+    if (!pixelClicked) {
+        beforeMouseHover.backgroundColor = element.style.backgroundColor;
+        beforeMouseHover.opacity = element.style.opacity;
+        if (mode == 'intensity') {
+            element.style.opacity = currModeColor.intensity + element.currOpacity;
+            element.style.backgroundColor = currModeColor.color;
+        }
+        else if (mode == 'soft'){
+            element.style.opacity = element.style.opacity - currModeColor.soft;
+            // element.style.backgroundColor = currModeColor.color;
+        }
+        else {
+            element.style.opacity = 1;
+            element.style.backgroundColor = currModeColor[mode];    
+        }
+        return;}    
+    if (!est)
         {
             pixelStart = pixelEnd;
             pixelEnd = element;
@@ -131,14 +168,16 @@ function sketch(element, est = false){
     case 'rainbow':
         element.currOpacity = 0;
         element.style.opacity = 1;
-        element.style.backgroundColor = getCloseRandom();
+        currModeColor.rainbow = getCloseRandom();
+        element.style.backgroundColor = currModeColor.rainbow;
         break;
     case 'intensity':
         element.style.backgroundColor != color ? element.currOpacity = 0 : null;
         if (element.currOpacity + intensity <= 1)
         {
             element.currOpacity = element.currOpacity + intensity;
-            element.style.backgroundColor = color;
+            currModeColor.intensity = intensity;
+            element.style.backgroundColor = currModeColor.color;
         }
         else element.currOpacity = 1;
             element.style.opacity = element.currOpacity;
@@ -216,3 +255,5 @@ function switchClass(element, newClass, oldClass)
     element.classList.add(newClass);
 }
 color = toRGB(colorPicker.value);
+currModeColor.color = color;
+currModeColor.intensity = intensity;

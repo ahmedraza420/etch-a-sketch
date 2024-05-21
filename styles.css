@@ -286,12 +286,6 @@ a:hover, .icon:hover{
     background-color: rgb(245, 245, 245);
     /* border: 1px solid rgba(0, 0, 0, 0.3); */
 }
-
-.gridItem:hover {
-    /* filter: brightness(120%) contrast(80%); */
-    /* border-color: rgba(0,0,0,1); */
-    filter:hue-rotate(180deg) saturate(100%) brightness(80%) sepia(50%);
-}
 #footer {
     min-height: 50px;
     width: 100%;
