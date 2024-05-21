@@ -25,7 +25,7 @@ const buttonColorItems = document.querySelectorAll(".buttonlight");
 
 const DEFAULT_COL = sketchBoard.style.backgroundColor; 
 const SOFT_ERASER_INTENSITY = 0.25;
-let color, currentFocusedButton, pixelStart = null, pixelEnd = null;
+let color, currentFocusedButton, pixelStart = null, pixelEnd = null, pixelClicked = false;
 let theme = themes[0].id;
 let mode = 'color';
 let currentRainbow = [Math.random() * 255, Math.random() * 255, Math.random() * 255];
@@ -37,8 +37,12 @@ setNewGrid(gridSize.value);
 intensityDisplay.innerText = intensity * 100 + `%`;
 gridSize.addEventListener('input', ()=>{
 gridSizeButton.innerText = `${gridSize.value} x ${gridSize.value}`});
-gridSize.addEventListener('click', ()=>{setNewGrid(gridSize.value)});
-gridSizeButton.addEventListener('click', () => setNewGrid(gridSize.value));
+gridSize.addEventListener('click', ()=>{setNewGrid(gridSize.value);
+    pixelClicked = false;
+});
+gridSizeButton.addEventListener('click', () => {setNewGrid(gridSize.value)
+    pixelClicked = false;
+});
 colorPicker.addEventListener('input', () => {color = toRGB(colorPicker.value)});
 colorButton.addEventListener('click', e => {mode = 'color';
     focusButton(e.target);
@@ -60,7 +64,9 @@ intensityButton.addEventListener('click', e => {mode = 'intensity';
     colorIntensity.addEventListener('input', () => {
     intensity = colorIntensity.value / 100;
 });
-clearButton.addEventListener('click', () => setNewGrid(gridSize.value));
+clearButton.addEventListener('click', () => {setNewGrid(gridSize.value)
+    pixelClicked = false;
+});
 themeButton.addEventListener('click', toggleTheme);
 sketchBoard.addEventListener('touchstart', e=> {
     e.preventDefault();
@@ -90,6 +96,10 @@ function setNewGrid(size){sketchBoard.innerHTML = '';
     for(let j=0; j<size; j++){
             const gridItem = document.createElement('div');
             gridItem.setAttribute('class', 'gridItem');
+            gridItem.addEventListener('click', () => {
+                pixelClicked == true ? pixelClicked = false : pixelClicked = true;
+                pixelStart = null, pixelEnd = null;
+            });
             gridItem.addEventListener('mouseover', e=> sketch(e.target));
             gridItem.currOpacity = 0;
             gridItem.x = j;
@@ -97,6 +107,7 @@ function setNewGrid(size){sketchBoard.innerHTML = '';
             row.appendChild(gridItem);}
     sketchBoard.appendChild(row);}}           
 function sketch(element, est = false){
+    if (pixelClicked == false) return;
     if (est == false)
         {
             pixelStart = pixelEnd;
@@ -114,8 +125,11 @@ function sketch(element, est = false){
         break;
     case 'eraser':
         element.style.backgroundColor = DEFAULT_COL;
+        element.currOpacity = 0;
+        element.style.opacity = 1;
         break;
     case 'rainbow':
+        element.currOpacity = 0;
         element.style.opacity = 1;
         currentRainbow[0] = Math.max(0, Math.min(255, Math.floor(currentRainbow[0] + (Math.random() - 0.5) * 64)));
         currentRainbow[1] = Math.max(0, Math.min(255, Math.floor(currentRainbow[1] + (Math.random() - 0.5) * 64)));
@@ -160,6 +174,7 @@ function getPixel (x, y)
     return sketchBoard.children[y].children[x];
 }
 function focusButton(target){menuButtons.forEach(b => {currentFocusedButton == target? null : b.classList.remove("modeactivelight", "modeactivedark")});
+    pixelClicked = false;
     colorIntensity.style.display = 'none';
     if(theme === 'light') target.classList.add("modeactivelight");
     else target.classList.add("modeactivedark");
@@ -182,7 +197,7 @@ function toggleTheme()
     {
         lightIcon.style.opacity = 0;
         darkIcon.style.opacity = 1;
-        theme = 'light';
+        theme = 'light';    
         bgColorItems.forEach(i => switchClass(i, 'bglight', 'bgdark'));
         textColorItems.forEach(i => switchClass(i, 'textlight', 'textdark'));
         menuColorItems.forEach(i => switchClass(i, 'menulight', 'menudark'));
