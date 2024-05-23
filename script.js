@@ -55,7 +55,7 @@ gridSize.addEventListener('click', ()=>{setNewGrid(gridSize.value);
 gridSizeButton.addEventListener('click', () => {setNewGrid(gridSize.value)
     pixelClicked = false;
 });
-colorPicker.addEventListener('input', () => {color = toRGB(colorPicker.value); currModeColor[color] = color;});
+colorPicker.addEventListener('input', () => {color = toRGB(colorPicker.value); currModeColor.color = color; pixelClicked = false});
 colorButton.addEventListener('click', e => {mode = 'color';
     focusButton(e.target);
     });
@@ -138,7 +138,7 @@ function sketch(element, est = false){
         }
         else if (mode == 'soft'){
             element.style.opacity = element.style.opacity - currModeColor.soft;
-            // element.style.backgroundColor = currModeColor.color;
+            element.style.backgroundColor = currModeColor.color;
         }
         else {
             element.style.opacity = 1;
