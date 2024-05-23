@@ -24,12 +24,13 @@ const borderColorItems = document.querySelectorAll(".borderlight");
 const buttonColorItems = document.querySelectorAll(".buttonlight");
 
 const DEFAULT_COL = sketchBoard.style.backgroundColor; 
-const SOFT_ERASER_INTENSITY = 0.25;
+const SOFT_ERASER_INTENSITY = 0.20;
 let color, currentFocusedButton, pixelStart = null, pixelEnd = null, pixelClicked = false, clickReleased = false;
 let theme = themes[0].id;
 let mode = 'color';
 let currentRainbow = [Math.random() * 255, Math.random() * 255, Math.random() * 255];
 let intensity = colorIntensity.value/100;
+let currTarget = null, prevTarget = null;
 let beforeMouseHover = {
     backgroundColor : null,
     opacity : 1, 
@@ -84,12 +85,14 @@ clearButton.addEventListener('click', () => {setNewGrid(gridSize.value)
 themeButton.addEventListener('click', toggleTheme);
 sketchBoard.addEventListener('touchstart', e=> {
     e.preventDefault();
-    sketch(e.target);});
-sketchBoard.addEventListener('touchmove', e =>{
+    sketch(e.target, false, true);});
+    sketchBoard.addEventListener('touchmove', e =>{
     e.preventDefault();
     const touch = e.touches[0];
     const target = document.elementFromPoint(touch.clientX, touch.clientY);
-    (target && sketchBoard.contains(target)) ? sketch(target) : null;});
+    prevTarget = currTarget;
+    currTarget = target;
+    ((prevTarget !== currTarget) && target && sketchBoard.contains(target)) ? sketch(target, false, true) : null;});
 sketchBoard.addEventListener('touchend', e => {
     pixelStart = null, pixelEnd = null;
 });
@@ -128,8 +131,8 @@ function setNewGrid(size){sketchBoard.innerHTML = '';
             gridItem.y = i; 
             row.appendChild(gridItem);}
     sketchBoard.appendChild(row);}}           
-function sketch(element, est = false){
-    if (!pixelClicked) {
+function sketch(element, est = false, tch=false){
+    if (!pixelClicked && !tch) {
         beforeMouseHover.backgroundColor = element.style.backgroundColor;
         beforeMouseHover.opacity = element.style.opacity;
         if (mode == 'intensity') {
@@ -138,22 +141,21 @@ function sketch(element, est = false){
         }
         else if (mode == 'soft'){
             element.style.opacity = element.style.opacity - currModeColor.soft;
-            element.style.backgroundColor = currModeColor.color;
         }
         else {
             element.style.opacity = 1;
             element.style.backgroundColor = currModeColor[mode];    
         }
         return;}    
-    if (!est)
-        {
-            pixelStart = pixelEnd;
-            pixelEnd = element;
-        if (pixelEnd != null && pixelStart != null)
+        if (!est)
             {
-                estimate(pixelStart.x, pixelStart.y, pixelEnd.x, pixelEnd.y);
+                pixelStart = pixelEnd;
+                pixelEnd = element;
+                if (pixelEnd != null && pixelStart != null)
+                    {
+                        estimate(pixelStart.x, pixelStart.y, pixelEnd.x, pixelEnd.y);
+                    }
             }
-        }
     switch(mode){
     case 'color':
         element.style.backgroundColor = color;
